@@ -1,0 +1,21 @@
+nav {
+  width: 80%;
+  margin: auto;
+  position: sticky;
+  top: 2%;
+
+  header {
+    background-color: var(--secondary-font-color);
+    padding: 1rem 1.5rem;
+    border-radius: 30px;
+  }
+}
+
+.logo {
+  width: fit-content;
+
+  h1 {
+    color: var(--main-font-color);
+    font-size: 25px;
+  }
+}

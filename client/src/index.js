@@ -17,6 +17,7 @@ root.render(
         <Web3ContextProvider>
           <App />
         </Web3ContextProvider>
+
         <ReactQueryDevtools />
       </QueryClientProvider>
     </BrowserRouter>

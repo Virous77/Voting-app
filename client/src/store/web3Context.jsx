@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { web3Provider } from "../Web3/contract";
+import { BrowserProvider } from "ethers";
 
 const Web3Context = createContext();
 
@@ -9,19 +10,17 @@ export const Web3ContextProvider = ({ children }) => {
 
   const handleConnect = async () => {
     if (web3) {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log(accounts);
-      setUserAddress(accounts[0]);
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+
+      console.log(provider);
     } else {
+      console.log("cool");
     }
   };
 
-  console.log(userAddress);
-
   const handleDisconnect = () => {
-    if (window.ethereum && window.ethereum.disconnect) {
+    if (web3) {
       window.ethereum.disconnect();
       console.log("Disconnected from provider.");
     } else {

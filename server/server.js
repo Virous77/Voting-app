@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 dotenv.config();
+import router from "./src/router.js";
 
 const app = express();
 
@@ -17,7 +18,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
-// app.use(UploadImage);
+app.use("/api/v1", router);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong, Try again!";
+
+  return res.status(errorStatus).json({
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+    success: false,
+  });
+});
 
 const PORT = 4000 || process.env.PORT;
 mongoose

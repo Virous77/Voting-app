@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 nav {
   width: 80%;
   margin: auto;
@@ -5,9 +7,10 @@ nav {
   top: 2%;
 
   header {
-    background-color: var(--secondary-font-color);
+    background-color: var(--secondary-background-color);
     padding: 1rem 1.5rem;
     border-radius: 30px;
+    @include displayFlex;
   }
 }
 
@@ -17,5 +20,23 @@ nav {
   h1 {
     color: var(--main-font-color);
     font-size: 25px;
+  }
+}
+
+.right-nav {
+  button {
+    background-color: var(--secondary-font-color);
+    color: var(--main-font-color);
+    font-size: 16px;
+    padding: 7px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: scale 300ms ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+      scale: 1.03;
+    }
   }
 }

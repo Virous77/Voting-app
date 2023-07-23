@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Web3ContextProvider } from "./store/web3Context";
+import { GlobalContextProvider } from "./store/globalContext";
 
 const client = new QueryClient();
 
@@ -14,10 +15,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={client}>
-        <Web3ContextProvider>
-          <App />
-        </Web3ContextProvider>
-
+        <GlobalContextProvider>
+          <Web3ContextProvider>
+            <App />
+          </Web3ContextProvider>
+        </GlobalContextProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
     </BrowserRouter>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useWeb3 } from "../../store/web3Context";
 
 const Header = () => {
-  const { handleConnect, handleDisconnect } = useWeb3();
+  const { handleConnect, handleDisconnect, user } = useWeb3();
   return (
     <nav>
       <header>
@@ -14,9 +14,11 @@ const Header = () => {
           </Link>
         </div>
 
-        <div>
-          <button onClick={handleConnect}>Connect</button>
-          <button onClick={handleDisconnect}>Disconnect</button>
+        <div className={styles["right-nav"]}>
+          {!user.isLoggedIn && <button onClick={handleConnect}>Connect</button>}
+          {user.isLoggedIn && (
+            <button onClick={handleDisconnect}>Disconnect</button>
+          )}
         </div>
       </header>
     </nav>

@@ -3,7 +3,11 @@ import { createContext, useState, useContext } from "react";
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-  const [state, setState] = useState({ message: "", status: "" });
+  const [state, setState] = useState({
+    message: "",
+    status: "",
+    register: false,
+  });
 
   const handleSetNotification = ({ message, status }) => {
     setState({ ...state, message, status });
@@ -17,7 +21,7 @@ export const GlobalContextProvider = ({ children }) => {
   };
 
   return (
-    <GlobalContext.Provider value={{ handleSetNotification, state }}>
+    <GlobalContext.Provider value={{ handleSetNotification, state, setState }}>
       {children}
     </GlobalContext.Provider>
   );

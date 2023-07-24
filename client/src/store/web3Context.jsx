@@ -2,43 +2,71 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { web3Provider } from "../Web3/contract";
 import { getLocalData } from "../utils/utils";
 import { useGlobalContext } from "./globalContext";
-import { useMutation } from "react-query";
-import { createPost } from "../components/apis/apis";
+import { useMutation, useQuery } from "react-query";
+import { getAPI, postAPI } from "../components/apis/apis";
 
 const Web3Context = createContext();
 
 export const Web3ContextProvider = ({ children }) => {
-  const [user, setUser] = useState({ userAddress: "", isLoggedIn: false });
+  const [user, setUser] = useState({
+    userAddress: "",
+    isLoggedIn: false,
+    name: "",
+    chain: "",
+  });
   const { handleSetNotification, state, setState } = useGlobalContext();
   const [metamaskNotInstalled, setNotMetamaskInstalled] = useState(false);
   const web3 = web3Provider();
 
-  const data = {
-    name: "Reetesh Kumar",
-    wallet_address: "0x7b6E929790e9e1ad096165BA71fe5945821E3f1c",
-    chain: "97",
+  const pocket = {
+    name: user.name,
+    wallet_address: user.userAddress,
+    chain: user.chain,
   };
 
   const { mutate } = useMutation({
-    mutationFn: (datas) => {
-      return createPost({ userData: datas, endPoints: "/user" });
+    mutationFn: (params) => {
+      return postAPI({ userData: params, endPoints: "/user" });
     },
     onError: (data) => {
-      setState({ ...state, register: true });
+      console.log(data);
     },
     onSuccess: (data) => {
-      console.log(data);
+      localStorage.setItem("vId", JSON.stringify(user.userAddress));
+      setUser({ ...user, isLoggedIn: true });
+      setState({ ...state, register: false });
+    },
+  });
+
+  const handleCreateUser = () => {
+    mutate(pocket);
+  };
+
+  const { isLoading } = useQuery("user", {
+    queryFn: () => {
+      return getAPI({ endPoints: `/register/${String(user.userAddress)}` });
+    },
+    retry: false,
+    enabled: user.userAddress ? true : false,
+    refetchOnWindowFocus: false,
+    onSuccess: (data) => {
+      if (data.status) {
+        localStorage.setItem("vId", JSON.stringify(user.userAddress));
+        setUser({ ...user, isLoggedIn: true });
+      } else {
+        setState({ ...state, register: true });
+      }
     },
   });
 
   const handleConnect = async () => {
     if (web3) {
       try {
+        const chainId = await web3.eth.getChainId();
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        setUser({ ...user, userAddress: accounts[0], isLoggedIn: true });
-        localStorage.setItem("vId", JSON.stringify(accounts[0]));
+        setUser({ ...user, userAddress: accounts[0], chain: chainId });
       } catch (error) {
         handleSetNotification({
           message: error.message || "Something went wrong,Try again",
@@ -53,10 +81,6 @@ export const Web3ContextProvider = ({ children }) => {
   const handleDisconnect = () => {
     localStorage.clear();
     setUser({ ...user, isLoggedIn: false });
-  };
-
-  const handleCreateUser = () => {
-    mutate(data);
   };
 
   useEffect(() => {

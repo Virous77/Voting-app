@@ -1,9 +1,7 @@
-import React from "react";
-import { useWeb3 } from "../store/web3Context";
+import Home from "../components/Home/Home";
 
 const HomePage = () => {
-  const { handleCreateUser } = useWeb3();
-  return <div onClick={handleCreateUser}>HomePage</div>;
+  return <Home />;
 };
 
 export default HomePage;

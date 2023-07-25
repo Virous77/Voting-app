@@ -1,0 +1,59 @@
+@import "../common/variables.scss";
+
+.SignUp {
+  color: var(--main-font-color);
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  form {
+    width: 100%;
+    margin-top: 2rem;
+    @include displayCol;
+    gap: 2rem;
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      outline: none;
+      background-color: var(--main-font-color);
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    fieldset {
+      border: none;
+      @include displayCenter;
+      gap: 10px;
+      margin-left: 10px;
+
+      p {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--main-font-color);
+        @include displayAllCenter;
+        cursor: pointer;
+        font-size: 20px;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  button {
+    padding: 10px;
+    background-color: var(--main-font-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--secondary-font-color);
+
+    &:hover {
+      opacity: 0.9;
+      cursor: pointer;
+    }
+  }
+}

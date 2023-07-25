@@ -36,16 +36,19 @@
 }
 
 .modal-header {
+  color: var(--main-font-color);
+
   button {
     width: 30px;
     height: 30px;
-    background-color: transparent;
     border-radius: 100px;
     @include displayCenter;
     justify-content: center;
+    border: none;
+    background-color: transparent;
 
     &:hover {
-      background-color: var(--card-color);
+      background-color: var(--main-font-color);
     }
   }
 }

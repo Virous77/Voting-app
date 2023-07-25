@@ -25,13 +25,10 @@ export const Web3ContextProvider = ({ children }) => {
   };
 
   const { mutate } = useMutation({
-    mutationFn: (params) => {
-      return postAPI({ userData: params, endPoints: "/user" });
+    mutationFn: () => {
+      return postAPI({ userData: pocket, endPoints: "/user" });
     },
-    onError: (data) => {
-      console.log(data);
-    },
-    onSuccess: (data) => {
+    onSuccess: () => {
       localStorage.setItem("vId", JSON.stringify(user.userAddress));
       setUser({ ...user, isLoggedIn: true });
       setState({ ...state, register: false });
@@ -39,7 +36,7 @@ export const Web3ContextProvider = ({ children }) => {
   });
 
   const handleCreateUser = () => {
-    mutate(pocket);
+    mutate();
   };
 
   const { isLoading } = useQuery("user", {
@@ -66,7 +63,7 @@ export const Web3ContextProvider = ({ children }) => {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        setUser({ ...user, userAddress: accounts[0], chain: chainId });
+        setUser({ ...user, userAddress: accounts[0], chain: String(chainId) });
       } catch (error) {
         handleSetNotification({
           message: error.message || "Something went wrong,Try again",
@@ -80,7 +77,13 @@ export const Web3ContextProvider = ({ children }) => {
 
   const handleDisconnect = () => {
     localStorage.clear();
-    setUser({ ...user, isLoggedIn: false });
+    setUser({
+      ...user,
+      isLoggedIn: false,
+      name: "",
+      userAddress: "",
+      chain: "",
+    });
   };
 
   useEffect(() => {
@@ -98,6 +101,8 @@ export const Web3ContextProvider = ({ children }) => {
         user,
         metamaskNotInstalled,
         handleCreateUser,
+        setUser,
+        isLoading,
       }}
     >
       {children}

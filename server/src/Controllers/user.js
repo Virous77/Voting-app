@@ -12,13 +12,10 @@ export const createUser = async (req, res, next) => {
 };
 
 export const checkRegister = async (req, res, next) => {
-  console.log(req.params.address.toLowerCase());
   try {
     const findUser = await User.findOne({
       wallet_address: req.params.address,
     });
-
-    console.log(findUser);
 
     if (findUser) {
       res.status(200).json({ status: true });

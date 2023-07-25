@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.scss";
 
-export const Modal = ({ isOpen, onClose, children, classStyle }) => {
+export const Modal = ({ isOpen, onClose, children, classStyle, width }) => {
   if (!isOpen) {
     return null;
   }
@@ -11,6 +11,7 @@ export const Modal = ({ isOpen, onClose, children, classStyle }) => {
       <div
         className={classStyle ? styles[classStyle] : styles["modal-content"]}
         onClick={(e) => e.stopPropagation()}
+        style={{ width: width }}
       >
         {children}
       </div>

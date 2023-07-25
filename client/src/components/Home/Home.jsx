@@ -11,6 +11,7 @@ const Home = () => {
         <Modal
           isOpen="isOpen"
           onClose={() => setState({ ...state, register: false })}
+          width="500px"
         >
           <ModalHeader
             name="Sign Up"

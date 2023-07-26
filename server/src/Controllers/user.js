@@ -26,3 +26,16 @@ export const checkRegister = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ wallet_address: req.params.id });
+
+    if (!user)
+      return next(createError({ message: "User don't exists.", status: 400 }));
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -7,12 +7,12 @@ const ModalHeader = ({ name, onClose }) => {
     <header className={styles["modal-header"]}>
       <h2>{name}</h2>
 
-      <button>
+      <button style={{ background: "var(--main-font-color)" }}>
         <AiOutlineClose
           cursor="pointer"
           size={20}
           onClick={onClose}
-          color="black"
+          color="var(--secondary-font-color)"
         />
       </button>
     </header>

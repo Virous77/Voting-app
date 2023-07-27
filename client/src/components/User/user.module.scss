@@ -1,5 +1,144 @@
+@import "../common/variables.scss";
+
 .user {
   max-width: 1150px;
   margin: auto;
   margin-top: 2rem;
+}
+
+.profile {
+  @include displayCenter;
+  align-items: flex-start;
+  gap: 2rem;
+  box-shadow: 0px 2px 8px rgba(42, 42, 42, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+
+  h2 {
+    color: var(--main-font-color);
+    font-size: 32px;
+  }
+
+  p {
+    @include displayCenter;
+    gap: 10px;
+    margin-top: 8px;
+    color: var(--main-font-color);
+  }
+
+  small {
+    font-size: 15px;
+    display: inline-block;
+  }
+}
+
+.userPic {
+  width: 200px;
+
+  img {
+    width: 100%;
+    height: 200px;
+    border-radius: 100%;
+    border: 2px solid var(--secondary-font-color);
+  }
+}
+
+.tab {
+  margin-top: 1rem;
+  @include displayCenter;
+  gap: 2rem;
+  padding: 10px;
+  box-shadow: 0px 2px 8px rgba(42, 42, 42, 0.8);
+  border-radius: 5px;
+
+  button {
+    font-size: 16px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+
+    &:hover {
+      scale: 1.03;
+    }
+  }
+}
+
+.createVote {
+  margin-top: 1rem;
+
+  form {
+    width: 100%;
+    @include displayCol;
+    gap: 1.5rem;
+  }
+
+  fieldset {
+    width: 100%;
+    @include displayCol;
+    gap: 5px;
+    border: none;
+    position: relative;
+  }
+
+  label {
+    color: var(--main-font-color);
+    font-weight: 500;
+    width: fit-content;
+    border-bottom: 2px solid var(--secondary-background-color);
+  }
+
+  .wrap {
+    @include displayCenter;
+    gap: 2rem;
+
+    p {
+      width: 190px;
+      height: 25px;
+      background-color: white;
+      position: absolute;
+      top: 53%;
+      left: 1%;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 7px 10px;
+    outline: none;
+    font-size: 15px;
+    color: var(--secondary-font-color);
+  }
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: var(--secondary-background-color);
+    color: var(--main-font-color);
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.check {
+  @include displayCenter;
+  flex-direction: row !important;
+
+  p {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--main-font-color);
+    @include displayAllCenter;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 3px;
+  }
+
+  small {
+    color: var(--main-font-color);
+  }
 }

@@ -7,6 +7,7 @@ export const GlobalContextProvider = ({ children }) => {
     message: "",
     status: "",
     register: false,
+    tab: "running",
   });
 
   const handleSetNotification = ({ message, status }) => {

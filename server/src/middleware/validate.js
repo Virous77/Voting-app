@@ -16,3 +16,14 @@ export const AuthValidate = async (req, res, next) => {
     next(error.details[0].message);
   }
 };
+
+export const VoteValidate = async (req, res, next) => {
+  try {
+    const schema = joi.object({}).options({ stripUnknown: true });
+
+    const result = await schema.validateAsync(req.body);
+    if (result) next();
+  } catch (error) {
+    next(error.details[0].message);
+  }
+};

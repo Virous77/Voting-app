@@ -7,6 +7,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Web3ContextProvider } from "./store/web3Context";
 import { GlobalContextProvider } from "./store/globalContext";
+import { VoteContextProvider } from "./store/voteContext";
 
 const client = new QueryClient();
 
@@ -17,7 +18,9 @@ root.render(
       <QueryClientProvider client={client}>
         <GlobalContextProvider>
           <Web3ContextProvider>
-            <App />
+            <VoteContextProvider>
+              <App />
+            </VoteContextProvider>
           </Web3ContextProvider>
         </GlobalContextProvider>
         <ReactQueryDevtools />

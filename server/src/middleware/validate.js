@@ -19,7 +19,24 @@ export const AuthValidate = async (req, res, next) => {
 
 export const VoteValidate = async (req, res, next) => {
   try {
-    const schema = joi.object({}).options({ stripUnknown: true });
+    const schema = joi
+      .object({
+        admin: joi.string().trim().required(),
+        admin_address: joi.string().trim().required(),
+        start_time: joi.string().trim().required(),
+        end_time: joi.string().trim().required(),
+        term: joi.boolean().truthy().required(),
+        for_vote: joi
+          .array()
+          .items(
+            joi.object({
+              candidate: joi.string().trim().required(),
+              candidate_address: joi.string().trim().required(),
+            })
+          )
+          .required(),
+      })
+      .options({ stripUnknown: true });
 
     const result = await schema.validateAsync(req.body);
     if (result) next();

@@ -1,19 +1,46 @@
 import styles from "./user.module.scss";
 import { BsCheck } from "react-icons/bs";
 import { useVote } from "../../store/voteContext";
+import { useState } from "react";
 
 const CreateVote = () => {
-  const { createVote, setCreateVote, handleChange, handleCreateVote } =
-    useVote();
   const {
-    admin,
-    admin_name,
+    createVote,
+    setCreateVote,
+    handleChange,
+    handleCreateVote,
     candidate,
+    setCandidate,
+    setCandidateName,
     candidate_name,
-    start_time,
-    end_time,
-    term,
-  } = createVote;
+  } = useVote();
+  const { admin, admin_name, start_time, end_time, term } = createVote;
+  const [count, setCount] = useState([0, 1]);
+
+  const handleUpdate = ({ value, idx, name }) => {
+    const updatedCandidate = [...candidate];
+    const updateCandidateName = [...candidate_name];
+
+    if (name === "candidate") {
+      updatedCandidate[idx] = value;
+      setCandidate(updatedCandidate);
+    } else {
+      updateCandidateName[idx] = value;
+      setCandidateName(updateCandidateName);
+    }
+  };
+
+  const handleFilter = (id) => {
+    console.log(count);
+    console.log(id);
+    const newCount = count.filter((value, idx) => idx !== id);
+    console.log(newCount);
+    const newCandidateName = candidate_name.filter((value, idx) => idx !== id);
+    const newCandidate = candidate.filter((value, idx) => idx !== id);
+    setCount(newCount);
+    setCandidateName(newCandidateName);
+    setCandidate(newCandidate);
+  };
 
   return (
     <div className={styles.createVote}>
@@ -42,28 +69,49 @@ const CreateVote = () => {
           </fieldset>
         </div>
 
-        <div className={styles.wrap}>
-          <fieldset>
-            <label htmlFor="candidate">Candidate Address</label>
-            <input
-              type="text"
-              id="candidate"
-              name="candidate"
-              value={candidate}
-              onChange={handleChange}
-            />
-          </fieldset>
+        <div className={styles.candidate}>
+          {count.map((count, idx) => (
+            <div className={styles.wrap} key={idx}>
+              <fieldset>
+                <label htmlFor="candidate">Candidate Address {idx + 1}</label>
+                <input
+                  type="text"
+                  id="candidate"
+                  value={candidate[idx]}
+                  onChange={(e) =>
+                    handleUpdate({ e: e.target.value, idx, name: "candidate" })
+                  }
+                />
+              </fieldset>
 
-          <fieldset>
-            <label htmlFor="candidate_name">Candidate Name</label>
-            <input
-              type="text"
-              id="candidate_name"
-              name="candidate_name"
-              value={candidate_name}
-              onChange={handleChange}
-            />
-          </fieldset>
+              <fieldset>
+                <div className={styles.label}>
+                  <label htmlFor="candidate_name">
+                    Candidate Name {idx + 1}
+                  </label>
+
+                  {idx + 1 >= 3 && (
+                    <b onClick={() => handleFilter(idx)}>Remove</b>
+                  )}
+                </div>
+
+                <input
+                  type="text"
+                  id="candidate_name"
+                  name="candidate_name"
+                  value={candidate_name[idx]}
+                  onChange={(e) =>
+                    handleUpdate({
+                      e: e.target.value,
+                      idx,
+                      name: "candidate-name",
+                    })
+                  }
+                />
+              </fieldset>
+            </div>
+          ))}
+          <button onClick={() => setCount([...count, 1])}>Add</button>
         </div>
 
         <div className={styles.wrap}>

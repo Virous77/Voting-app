@@ -66,6 +66,9 @@
 
 .createVote {
   margin-top: 1rem;
+  min-height: fit-content;
+  max-height: 530px;
+  overflow: scroll;
 
   form {
     width: 100%;
@@ -140,5 +143,27 @@
 
   small {
     color: var(--main-font-color);
+  }
+}
+
+.candidate {
+  @include displayCol;
+  gap: 1rem;
+}
+
+.label {
+  @include displayFlex;
+
+  b {
+    font-weight: normal;
+    background-color: var(--secondary-background-color);
+    color: var(--main-font-color);
+    padding: 3px 10px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

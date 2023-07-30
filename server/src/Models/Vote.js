@@ -22,6 +22,18 @@ const VoteSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    for_vote: [
+      {
+        candidate: {
+          type: String,
+          required: true,
+        },
+        candidate_address: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -6,12 +6,12 @@ export const VoteContextProvider = ({ children }) => {
   const [createVote, setCreateVote] = useState({
     admin: "",
     admin_name: "",
-    candidate: "",
-    candidate_name: "",
     start_time: "",
     end_time: "",
     term: false,
   });
+  const [candidate, setCandidate] = useState(["", ""]);
+  const [candidate_name, setCandidateName] = useState(["", ""]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +24,16 @@ export const VoteContextProvider = ({ children }) => {
 
   return (
     <VoteContext.Provider
-      value={{ createVote, setCreateVote, handleChange, handleCreateVote }}
+      value={{
+        createVote,
+        setCreateVote,
+        handleChange,
+        handleCreateVote,
+        candidate,
+        setCandidate,
+        candidate_name,
+        setCandidateName,
+      }}
     >
       {children}
     </VoteContext.Provider>

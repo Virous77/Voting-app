@@ -17,29 +17,32 @@ const CreateVote = () => {
   const { admin, admin_name, start_time, end_time, term } = createVote;
   const [count, setCount] = useState([0, 1]);
 
-  const handleUpdate = ({ value, idx, name }) => {
+  const handleUpdate = ({ e, idx, name }) => {
     const updatedCandidate = [...candidate];
     const updateCandidateName = [...candidate_name];
 
     if (name === "candidate") {
-      updatedCandidate[idx] = value;
+      updatedCandidate[idx] = e;
       setCandidate(updatedCandidate);
     } else {
-      updateCandidateName[idx] = value;
+      updateCandidateName[idx] = e;
       setCandidateName(updateCandidateName);
     }
   };
 
   const handleFilter = (id) => {
-    console.log(count);
-    console.log(id);
     const newCount = count.filter((value, idx) => idx !== id);
-    console.log(newCount);
     const newCandidateName = candidate_name.filter((value, idx) => idx !== id);
     const newCandidate = candidate.filter((value, idx) => idx !== id);
     setCount(newCount);
     setCandidateName(newCandidateName);
     setCandidate(newCandidate);
+  };
+
+  const handleAdd = () => {
+    setCount([...count, 1]);
+    setCandidateName([...candidate_name, ""]);
+    setCandidate([...candidate, ""]);
   };
 
   return (
@@ -111,7 +114,10 @@ const CreateVote = () => {
               </fieldset>
             </div>
           ))}
-          <button onClick={() => setCount([...count, 1])}>Add</button>
+
+          <div className={styles.add}>
+            <button onClick={handleAdd}>Add</button>
+          </div>
         </div>
 
         <div className={styles.wrap}>

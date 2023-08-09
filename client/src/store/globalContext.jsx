@@ -3,12 +3,13 @@ import { createContext, useState, useContext } from "react";
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-  const [state, setState] = useState({
+  const initialState = {
     message: "",
     status: "",
     register: false,
     tab: "running",
-  });
+  };
+  const [state, setState] = useState(initialState);
 
   const handleSetNotification = ({ message, status }) => {
     setState({ ...state, message, status });
@@ -17,7 +18,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
     setTimeout(() => {
       document.querySelector(".notification")?.classList.remove("active");
-      setState({ ...state, message: "", status: "" });
+      setState(initialState);
     }, 3000);
   };
 

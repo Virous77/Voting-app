@@ -21,9 +21,8 @@ app.use(morgan("dev"));
 app.use("/api/v1", router);
 
 app.use((err, req, res, next) => {
-  console.log(err);
   const errorStatus = err.status || 500;
-  const errorMessage = err.message || "Something went wrong, Try again!";
+  const errorMessage = err.message || err || "Something went wrong, Try again!";
 
   return res.status(errorStatus).json({
     status: errorStatus,

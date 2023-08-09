@@ -82,6 +82,11 @@
     gap: 5px;
     border: none;
     position: relative;
+
+    @media (max-width: 620px) {
+      align-items: flex-start;
+      gap: 10px;
+    }
   }
 
   label {
@@ -94,6 +99,11 @@
   .wrap {
     @include displayCenter;
     gap: 2rem;
+
+    @media (max-width: 620px) {
+      flex-direction: column;
+      gap: 1rem;
+    }
 
     p {
       width: 190px;
@@ -149,6 +159,17 @@
 .candidate {
   @include displayCol;
   gap: 1rem;
+}
+
+.add {
+  text-align: end;
+  margin-top: -8px;
+
+  button {
+    width: 100px;
+    padding: 4px 10px;
+    font-size: 12px;
+  }
 }
 
 .label {

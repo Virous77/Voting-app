@@ -9,6 +9,7 @@ import CreateVote from "./CreateVote";
 import { Modal } from "../Modal/Modal";
 import ModalHeader from "../Modal/ModalHeader";
 import { useGlobalContext } from "../../store/globalContext";
+import Running from "./Running";
 
 const User = () => {
   const id = getLocalData("vId");
@@ -29,6 +30,7 @@ const User = () => {
     <main className={styles.user}>
       <Profile userData={data} />
       <Header />
+      {state.tab === "running" && <Running />}
 
       {state.tab === "create" && (
         <Modal

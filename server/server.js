@@ -7,6 +7,7 @@ import cors from "cors";
 import morgan from "morgan";
 dotenv.config();
 import router from "./src/router.js";
+import { voteStatusUpdate } from "./src/middleware/cron.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 app.use("/api/v1", router);
+voteStatusUpdate();
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

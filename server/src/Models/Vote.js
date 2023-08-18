@@ -14,8 +14,20 @@ const VoteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      default: "created",
+    },
     end_time: {
       type: String,
+      required: true,
+    },
+    end_date: {
+      type: Number,
+      required: true,
+    },
+    start_date: {
+      type: Number,
       required: true,
     },
     term: {

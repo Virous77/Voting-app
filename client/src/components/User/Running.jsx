@@ -10,7 +10,7 @@ const Running = () => {
   const { data, isLoading } = useQuery("running", {
     queryFn: () => {
       return getAPI({
-        endPoints: `/vote?admin_address=${id}&startDate=${new Date()}&endDate=${new Date()}`,
+        endPoints: `/vote?admin_address=${id}&status=running`,
       });
     },
     onSuccess: (data) => {

@@ -13,14 +13,14 @@ export const createVote = async (req, res, next) => {
 };
 
 export const getVote = async (req, res, next) => {
-  const { admin_address, startDate, endDate } = req.query;
+  const { admin_address, status } = req.query;
 
   try {
     const votes = await Vote.find({
       admin_address: admin_address,
-      start_time: { $lt: startDate },
-      end_time: { $lt: endDate },
+      status: status,
     });
+
     res.status(200).json(votes);
   } catch (error) {
     next(error);

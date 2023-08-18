@@ -25,7 +25,7 @@ export const VoteContextProvider = ({ children }) => {
     onError: (data) => {
       handleSetNotification({ message: data.message, status: "error" });
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       handleSetNotification({ message: "Voting created successfully." });
       setState({ ...state, tab: "running" });
       setCreateVote(initialState);
@@ -81,6 +81,10 @@ export const VoteContextProvider = ({ children }) => {
       admin_address: createVote.admin,
       admin: createVote.admin_name,
       ...rest,
+      start_time: new Date(rest.start_time),
+      end_time: new Date(rest.end_time),
+      start_date: new Date(rest.start_time).getDate(),
+      end_date: new Date(rest.end_time).getDate(),
       for_vote: createCandidate,
     };
 

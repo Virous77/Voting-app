@@ -188,3 +188,41 @@
     }
   }
 }
+
+.running {
+  padding: 1rem;
+}
+
+.vote {
+  @include displayCol;
+  gap: 1rem;
+}
+
+.vote-list {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  background-color: var(--secondary-font-color);
+  color: var(--main-font-color);
+  @include displayFlex;
+
+  h3 {
+    text-transform: capitalize;
+  }
+
+  div {
+    @include displayCol;
+    gap: 5px;
+  }
+
+  p {
+    font-size: 13px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

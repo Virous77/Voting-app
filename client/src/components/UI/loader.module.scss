@@ -30,3 +30,19 @@
     transform: rotate(360deg);
   }
 }
+
+.empty {
+  @include displayCol;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+
+  img {
+    width: 100%;
+    height: 150px;
+  }
+
+  small {
+    color: var(--main-font-color);
+  }
+}

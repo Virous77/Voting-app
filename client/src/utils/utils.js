@@ -20,3 +20,26 @@ export const tabs = [
     value: "complete",
   },
 ];
+
+export const month = [
+  "Jan",
+  "Feb",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+export const dateFormate = (date) => {
+  const dateData = new Date(date);
+
+  return `${
+    month[dateData.getMonth()]
+  }  ${dateData.getDate()}  ${dateData.getFullYear()}`;
+};

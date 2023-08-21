@@ -17,7 +17,7 @@ export const tabs = [
   {
     id: 3,
     name: "Voting Completed",
-    value: "complete",
+    value: "completed",
   },
 ];
 

@@ -28,7 +28,7 @@ const VoteList = ({ vote }) => {
             onClose={() => setVoteDetails(null)}
             name="Vote Details"
           />
-          <VoteDetails />
+          <VoteDetails voteDetails={voteDetails} />
         </Modal>
       )}
     </div>

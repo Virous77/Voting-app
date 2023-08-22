@@ -2,6 +2,7 @@ import styles from "./user.module.scss";
 import { BsCheck } from "react-icons/bs";
 import { useVote } from "../../store/voteContext";
 import { useState } from "react";
+import VoteType from "./VoteType";
 
 const CreateVote = () => {
   const {
@@ -143,6 +144,8 @@ const CreateVote = () => {
             {!end_time && <p></p>}
           </fieldset>
         </div>
+
+        <VoteType />
 
         <fieldset className={styles.check}>
           <p onClick={() => setCreateVote({ ...createVote, term: !term })}>

@@ -279,3 +279,35 @@
     color: green;
   }
 }
+
+.vote-type {
+  @include displayCenter;
+  gap: 3rem;
+
+  label {
+    border: none !important;
+  }
+}
+
+.vote-type-wrap {
+  @include displayCenter;
+  gap: 3rem;
+
+  div {
+    @include displayCenter;
+    gap: 10px;
+  }
+
+  p {
+    border: 2px solid var(--secondary-background-color);
+    width: 20px;
+    height: 20px;
+    @include displayCenter;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  b {
+    color: var(--main-font-color);
+  }
+}

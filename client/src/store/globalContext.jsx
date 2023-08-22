@@ -12,13 +12,24 @@ export const GlobalContextProvider = ({ children }) => {
   const [state, setState] = useState(initialState);
 
   const handleSetNotification = ({ message, status }) => {
-    setState({ ...state, message, status });
+    setState({
+      ...state,
+      message,
+      status,
+      tab: status === "error" ? state.tab : "running",
+    });
     if (message) {
       document.querySelector(".notification")?.classList.add("active");
     }
     setTimeout(() => {
       document.querySelector(".notification")?.classList.remove("active");
-      setState(initialState);
+      setState({
+        ...state,
+        message: "",
+        status: "",
+        register: false,
+        tab: status === "error" ? state.tab : "running",
+      });
     }, 3000);
   };
 

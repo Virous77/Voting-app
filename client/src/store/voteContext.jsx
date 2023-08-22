@@ -12,6 +12,8 @@ export const VoteContextProvider = ({ children }) => {
     start_time: "",
     end_time: "",
     term: false,
+    vote_type: "public",
+    vote_password: "",
   };
   const [createVote, setCreateVote] = useState(initialState);
   const [candidate, setCandidate] = useState(["", ""]);
@@ -26,6 +28,7 @@ export const VoteContextProvider = ({ children }) => {
       handleSetNotification({ message: data.message, status: "error" });
     },
     onSuccess: () => {
+      console.log("cool");
       handleSetNotification({ message: "Voting created successfully." });
       setState({ ...state, tab: "running" });
       setCreateVote(initialState);
@@ -40,6 +43,18 @@ export const VoteContextProvider = ({ children }) => {
   };
 
   const handleCreateVote = () => {
+    if (createVote.vote_type === "private") {
+      if (
+        !createVote.vote_password.trim() ||
+        createVote.vote_password.length < 5
+      ) {
+        return handleSetNotification({
+          message: "Password is required and length must be five and more",
+          status: "error",
+        });
+      }
+    }
+
     const createCandidate = candidate.map((value, idx) => {
       const data = {
         candidate: candidate_name[idx],

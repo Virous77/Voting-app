@@ -44,8 +44,16 @@ const VoteSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
+        vote: [{ type: String, default: null }],
       },
     ],
+    vote_type: {
+      type: String,
+      required: true,
+    },
+    vote_password: {
+      type: String,
+    },
   },
   {
     timestamps: true,

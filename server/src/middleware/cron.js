@@ -23,7 +23,7 @@ const getRunningOver = async () => {
   try {
     await Vote.updateMany(
       {
-        end_date: today.getDate(),
+        end_date: today.getDate() + 1,
         status: { $ne: "over" },
       },
       { $set: { status: "over" } }

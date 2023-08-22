@@ -25,6 +25,7 @@ export const VoteValidate = async (req, res, next) => {
         admin_address: joi.string().trim().required(),
         start_time: joi.string().trim().required(),
         end_time: joi.string().trim().required(),
+        vote_type: joi.string().trim().required(),
         for_vote: joi
           .array()
           .items(

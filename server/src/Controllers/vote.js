@@ -14,7 +14,6 @@ export const createVote = async (req, res, next) => {
 
 export const getVote = async (req, res, next) => {
   const { admin_address, status } = req.query;
-  console.log(admin)
 
   try {
     const votes = await Vote.find({
